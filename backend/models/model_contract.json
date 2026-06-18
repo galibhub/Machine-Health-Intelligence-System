@@ -1,0 +1,18 @@
+{
+  "feature_order": [
+    "Air temperature [K]",
+    "Process temperature [K]",
+    "Rotational speed [rpm]",
+    "Torque [Nm]",
+    "Tool wear [min]",
+    "temp_gap",
+    "power",
+    "wear_rate",
+    "heat_stress",
+    "stress_index",
+    "Type_L",
+    "Type_M"
+  ],
+  "model_name": "Random Forest",
+  "target": "Machine failure"
+}
