@@ -1,7 +1,7 @@
 import joblib
 from pathlib import Path
 
-from utils.feature_engineering import (
+from backend.utils.feature_engineering import (
     create_features
 )
 
@@ -36,9 +36,12 @@ def predict_machine_failure(data):
     )
 
     return {
-        "prediction": prediction,
-        "probability": round(
-            probability,
-            2
-        )
-    }
+    "prediction": (
+        "Failure"
+        if prediction == 1
+        else "No Failure"
+    ),
+    "probability": float(
+        round(probability, 2)
+    )
+}
