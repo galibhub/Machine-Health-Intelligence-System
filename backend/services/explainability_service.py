@@ -25,10 +25,18 @@ def get_top_contributors(
 
     contributions = []
 
+    IGNORE_FEATURES = {
+        "Type_L",
+        "Type_M"
+    }
+
     for feature, value in zip(
         feature_names,
         shap_values
     ):
+
+        if feature in IGNORE_FEATURES:
+            continue
 
         contributions.append(
             {
