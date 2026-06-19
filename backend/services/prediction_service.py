@@ -35,13 +35,26 @@ def predict_machine_failure(data):
         * 100
     )
 
-    return {
-    "prediction": (
-        "Failure"
-        if prediction == 1
-        else "No Failure"
-    ),
-    "probability": float(
-        round(probability, 2)
+    print(
+        "Prediction:",
+        prediction
     )
-}
+
+    print(
+        "Probability:",
+        probability
+    )
+
+    return {
+        "prediction": (
+            "Failure"
+            if prediction == 1
+            else "No Failure"
+        ),
+        "probability": float(
+            round(
+                probability,
+                2
+            )
+        )
+    }
