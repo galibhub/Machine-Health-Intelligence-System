@@ -4,6 +4,10 @@ from pathlib import Path
 from backend.utils.feature_engineering import (
     create_features
 )
+from backend.services.risk_service import (
+    calculate_risk_level
+)
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -35,15 +39,10 @@ def predict_machine_failure(data):
         * 100
     )
 
-    print(
-        "Prediction:",
-        prediction
-    )
+    risk_level = calculate_risk_level(
+    probability
+   )
 
-    print(
-        "Probability:",
-        probability
-    )
 
     return {
         "prediction": (
@@ -56,5 +55,7 @@ def predict_machine_failure(data):
                 probability,
                 2
             )
-        )
+        ),
+        "risk_level": risk_level
+
     }
