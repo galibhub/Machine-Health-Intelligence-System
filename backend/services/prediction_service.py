@@ -66,7 +66,10 @@ def predict_machine_failure(data):
     )
 
     model_explanations = (
-    get_top_contributors()
+    get_top_contributors(
+        model=model,
+        features=features
+    )
 )
 
 

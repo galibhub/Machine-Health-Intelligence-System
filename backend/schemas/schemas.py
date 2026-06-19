@@ -36,7 +36,7 @@ class ModelExplanation(BaseModel):
 
     feature: str
 
-    impact: float
+    contribution: float
 
 
 
