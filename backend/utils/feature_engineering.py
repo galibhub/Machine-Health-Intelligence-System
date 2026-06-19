@@ -1,6 +1,7 @@
 import pandas as pd
 
 
+
 def create_features(data):
 
     air_temp_k = (
@@ -38,6 +39,7 @@ def create_features(data):
         * wear_rate
     )
 
+#Encoding feature
     type_l = 0
     type_m = 0
 
@@ -46,6 +48,8 @@ def create_features(data):
 
     elif data.machine_type.upper() == "M":
         type_m = 1
+
+# mapping dataset feature with converted feature
 
     feature_dict = {
         "Air temperature [K]": air_temp_k,

@@ -8,6 +8,9 @@ from backend.services.risk_service import (
     calculate_risk_level
 )
 
+from backend.services.health_service import (
+    calculate_health_score
+)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -39,9 +42,15 @@ def predict_machine_failure(data):
         * 100
     )
 
+    #Risk Level Prediction
     risk_level = calculate_risk_level(
     probability
-   )
+    )
+    
+    #health score
+    health_score = calculate_health_score(
+    probability
+    )
 
 
     return {
@@ -56,6 +65,7 @@ def predict_machine_failure(data):
                 2
             )
         ),
-        "risk_level": risk_level
+        "risk_level": risk_level,
+        "health_score": health_score
 
     }
