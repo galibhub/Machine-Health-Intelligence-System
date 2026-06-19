@@ -15,6 +15,13 @@ from backend.services.health_service import (
 from backend.services.explanation_service import (
     analyze_root_causes
 )
+
+from backend.services.explainability_service import (
+    get_top_contributors
+)
+
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 MODEL_PATH = (
@@ -56,6 +63,10 @@ def predict_machine_failure(data):
     )
     root_causes = analyze_root_causes(
     data
+    )
+
+    model_explanations = (
+    get_top_contributors()
 )
 
 
@@ -73,6 +84,7 @@ def predict_machine_failure(data):
         ),
         "risk_level": risk_level,
         "health_score": health_score,
-        "root_causes": root_causes
+        "root_causes": root_causes,
+        "model_explanations": model_explanations
 
     }

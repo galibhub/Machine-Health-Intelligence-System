@@ -52,18 +52,18 @@ def create_features(data):
 # mapping dataset feature with converted feature
 
     feature_dict = {
-        "Air temperature [K]": air_temp_k,
-        "Process temperature [K]": process_temp_k,
-        "Rotational speed [rpm]": data.rotational_speed,
-        "Torque [Nm]": data.torque,
-        "Tool wear [min]": data.tool_wear,
-        "temp_gap": temp_gap,
-        "power": power,
-        "wear_rate": wear_rate,
-        "heat_stress": heat_stress,
-        "stress_index": stress_index,
-        "Type_L": type_l,
-        "Type_M": type_m
-    }
+    "Air_temperature_K_": air_temp_k,
+    "Process_temperature_K_": process_temp_k,
+    "Rotational_speed_rpm_": data.rotational_speed,
+    "Torque_Nm_": data.torque,
+    "Tool_wear_min_": data.tool_wear,
+    "temp_gap": temp_gap,
+    "power": power,
+    "wear_rate": wear_rate,
+    "heat_stress": heat_stress,
+    "stress_index": stress_index,
+    "Type_L": type_l,
+    "Type_M": type_m
+}
 
     return pd.DataFrame([feature_dict])

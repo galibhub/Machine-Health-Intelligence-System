@@ -32,6 +32,14 @@ class RootCause(BaseModel):
     message: str
 
 
+class ModelExplanation(BaseModel):
+
+    feature: str
+
+    impact: float
+
+
+
 class PredictionResponse(BaseModel):
 
     prediction: str
@@ -43,3 +51,8 @@ class PredictionResponse(BaseModel):
     health_score: int
 
     root_causes: List[RootCause]
+    model_explanations: List[
+    ModelExplanation
+]
+
+
