@@ -4,11 +4,27 @@ def generate_recommendations(
     model_explanations
 ):
 
+    
+    # Healthy Machine
+   
+
+    if risk_level == "Low":
+
+        return [
+            {
+                "priority": "Info",
+                "action": (
+                    "Machine operating within "
+                    "normal conditions."
+                )
+            }
+        ]
+
     recommendations = []
 
-    # -------------------------
+   
     # Risk Based Actions
-    # -------------------------
+    
 
     if risk_level == "Critical":
 
@@ -34,24 +50,37 @@ def generate_recommendations(
             }
         )
 
-    # -------------------------
-    # SHAP Based Actions
-    # -------------------------
+   
+    # Root Cause Factors
+    
+
+    factors = {
+        item["factor"]
+        for item in root_causes
+    }
+
+    
+    # SHAP Features
+    
 
     feature_scores = {
         item["feature"]: item["contribution"]
         for item in model_explanations
     }
 
-    # SHAP output already sorted
-    top_features = {
+    top_features = [
         item["feature"]
         for item in model_explanations[:4]
-    }
+    ]
 
     # Stress Index
+    
 
-    if "stress_index" in top_features:
+    if (
+        "stress_index" in top_features
+        and
+        "Stress Index" in factors
+    ):
 
         stress_score = feature_scores.get(
             "stress_index",
@@ -74,9 +103,15 @@ def generate_recommendations(
             }
         )
 
+   
     # Tool Wear
+   
 
-    if "Tool_wear_min_" in top_features:
+    if (
+        "Tool_wear_min_" in top_features
+        and
+        "Tool Wear" in factors
+    ):
 
         wear_score = feature_scores.get(
             "Tool_wear_min_",
@@ -98,9 +133,15 @@ def generate_recommendations(
             }
         )
 
+    # -------------------------
     # Torque
+    # -------------------------
 
-    if "Torque_Nm_" in top_features:
+    if (
+        "Torque_Nm_" in top_features
+        and
+        "Torque" in factors
+    ):
 
         torque_score = feature_scores.get(
             "Torque_Nm_",
@@ -123,9 +164,18 @@ def generate_recommendations(
             }
         )
 
+    
     # Rotational Speed
+    
 
-    if "Rotational_speed_rpm_" in top_features:
+    if (
+        "Rotational_speed_rpm_" in top_features
+        and
+        risk_level in [
+            "High",
+            "Critical"
+        ]
+    ):
 
         recommendations.append(
             {
@@ -137,14 +187,9 @@ def generate_recommendations(
             }
         )
 
-    # -------------------------
-    # Engineering Rule Actions
-    # -------------------------
 
-    factors = {
-        item["factor"]
-        for item in root_causes
-    }
+    # Temperature Gap
+   
 
     if "Temperature Gap" in factors:
 
@@ -158,6 +203,10 @@ def generate_recommendations(
             }
         )
 
+  
+    # Power
+   
+
     if "Power" in factors:
 
         recommendations.append(
@@ -170,9 +219,9 @@ def generate_recommendations(
             }
         )
 
-    # -------------------------
-    # Remove Duplicate Actions
-    # -------------------------
+  
+    # Remove Duplicates
+ 
 
     unique_recommendations = []
 
