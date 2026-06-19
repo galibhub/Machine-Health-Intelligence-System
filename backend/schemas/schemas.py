@@ -40,6 +40,15 @@ class ModelExplanation(BaseModel):
 
 
 
+class Recommendation(BaseModel):
+
+    priority: str
+
+    action: str
+
+
+
+
 class PredictionResponse(BaseModel):
 
     prediction: str
@@ -51,8 +60,11 @@ class PredictionResponse(BaseModel):
     health_score: int
 
     root_causes: List[RootCause]
-    model_explanations: List[
-    ModelExplanation
-]
+    model_explanations: List[ModelExplanation]
+    recommendations: List[
+        Recommendation
+    ]
+
+
 
 

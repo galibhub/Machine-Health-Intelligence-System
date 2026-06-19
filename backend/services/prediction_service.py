@@ -20,6 +20,9 @@ from backend.services.explainability_service import (
     get_top_contributors
 )
 
+from backend.services.recommendation_service import (
+    generate_recommendations
+)
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,12 +48,14 @@ def predict_machine_failure(data):
         features
     )[0]
 
-    probability = (
+    probability = round(
+    float(
         model.predict_proba(
             features
-        )[0][1]
-        * 100
-    )
+        )[0][1] * 100
+    ),
+    2
+)
 
     #Risk Level Prediction
     risk_level = calculate_risk_level(
@@ -70,6 +75,13 @@ def predict_machine_failure(data):
         model=model,
         features=features
     )
+) 
+    recommendations = (
+    generate_recommendations(
+        risk_level=risk_level,
+        root_causes=root_causes,
+        model_explanations=model_explanations
+    )
 )
 
 
@@ -88,6 +100,7 @@ def predict_machine_failure(data):
         "risk_level": risk_level,
         "health_score": health_score,
         "root_causes": root_causes,
-        "model_explanations": model_explanations
+        "model_explanations": model_explanations,
+        "recommendations": recommendations
 
     }
