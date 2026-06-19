@@ -62,13 +62,19 @@ def predict_machine_failure(data):
     probability
     )
 
-    #health score
-    health_score = calculate_health_score(
-    probability
-    )
     root_causes = analyze_root_causes(
     data
     )
+
+    #health score
+    health_score = calculate_health_score(
+    probability=probability,
+    root_causes=root_causes
+    )
+
+
+    
+
 
     model_explanations = (
     get_top_contributors(
