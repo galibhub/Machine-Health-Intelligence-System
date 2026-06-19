@@ -12,6 +12,9 @@ from backend.services.health_service import (
     calculate_health_score
 )
 
+from backend.services.explanation_service import (
+    analyze_root_causes
+)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 MODEL_PATH = (
@@ -23,7 +26,7 @@ MODEL_PATH = (
 model = joblib.load(
     MODEL_PATH
 )
-
+print(type(model))
 
 def predict_machine_failure(data):
 
@@ -46,11 +49,14 @@ def predict_machine_failure(data):
     risk_level = calculate_risk_level(
     probability
     )
-    
+
     #health score
     health_score = calculate_health_score(
     probability
     )
+    root_causes = analyze_root_causes(
+    data
+)
 
 
     return {
@@ -66,6 +72,7 @@ def predict_machine_failure(data):
             )
         ),
         "risk_level": risk_level,
-        "health_score": health_score
+        "health_score": health_score,
+        "root_causes": root_causes
 
     }

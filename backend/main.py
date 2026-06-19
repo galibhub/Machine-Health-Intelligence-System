@@ -1,15 +1,12 @@
 from fastapi import FastAPI
 
 from backend.schemas.schemas import (
-    PredictionRequest
+    PredictionRequest,
+    PredictionResponse
 )
 
 from backend.services.prediction_service import (
     predict_machine_failure
-)
-
-from backend.utils.feature_engineering import (
-    create_features
 )
 
 app = FastAPI(
@@ -17,7 +14,7 @@ app = FastAPI(
     version="1.0.0"
 )
 
-#root
+
 @app.get("/")
 def root():
 
@@ -26,8 +23,10 @@ def root():
     }
 
 
-# prediction
-@app.post("/predict")
+@app.post(
+    "/predict",
+    response_model=PredictionResponse
+)
 def predict(
     data: PredictionRequest
 ):

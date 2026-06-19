@@ -21,6 +21,17 @@ class PredictionRequest(BaseModel):
     tool_wear: int
 
 
+class RootCause(BaseModel):
+
+    factor: str
+
+    severity: str
+
+    value: float
+
+    message: str
+
+
 class PredictionResponse(BaseModel):
 
     prediction: str
@@ -31,6 +42,4 @@ class PredictionResponse(BaseModel):
 
     health_score: int
 
-    root_causes: List[str]
-
-    recommendations: List[str]
+    root_causes: List[RootCause]
