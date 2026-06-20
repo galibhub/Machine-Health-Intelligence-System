@@ -31,29 +31,36 @@ function HealthScoreGauge() {
         bg-[var(--bg-secondary)]
         border border-[var(--border)]
         rounded-2xl
-        p-8
-        text-center
+        p-6
       "
     >
-      <p className="text-[var(--text-secondary)] mb-6">
-        Health Score
-      </p>
+      <div className="mb-6">
+        <h3 className="text-xl font-bold">
+          Health Score
+        </h3>
 
-      <div className="relative w-44 h-44 mx-auto">
+        <p className="text-sm text-[var(--text-secondary)] mt-1">
+          Overall machine condition
+        </p>
+      </div>
+
+      <div className="flex flex-col items-center">
+
         <div
           className="
-            absolute inset-0
+            w-36
+            h-36
             rounded-full
-            border-[12px]
+            border-[10px]
             flex items-center justify-center
           "
           style={{
             borderColor: healthColor,
           }}
         >
-          <div>
+          <div className="text-center">
             <div
-              className="text-5xl font-bold"
+              className="text-4xl font-bold"
               style={{
                 color: healthColor,
               }}
@@ -62,7 +69,7 @@ function HealthScoreGauge() {
             </div>
 
             <div
-              className="text-sm mt-2 font-medium"
+              className="text-xs font-medium mt-1"
               style={{
                 color: healthColor,
               }}
@@ -71,23 +78,26 @@ function HealthScoreGauge() {
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="mt-6">
-        <div className="flex justify-between text-sm text-[var(--text-secondary)]">
-          <span>Critical</span>
-          <span>Excellent</span>
+        <div className="w-full mt-6">
+
+          <div className="flex justify-between text-xs text-[var(--text-secondary)]">
+            <span>Critical</span>
+            <span>Excellent</span>
+          </div>
+
+          <div className="mt-2 h-2 rounded-full bg-[var(--bg-primary)] overflow-hidden">
+            <div
+              className="h-full rounded-full"
+              style={{
+                width: `${score}%`,
+                backgroundColor: healthColor,
+              }}
+            />
+          </div>
+
         </div>
 
-        <div className="mt-2 h-2 rounded-full bg-[var(--bg-primary)] overflow-hidden">
-          <div
-            className="h-full rounded-full"
-            style={{
-              width: `${score}%`,
-              backgroundColor: healthColor,
-            }}
-          />
-        </div>
       </div>
     </div>
   );

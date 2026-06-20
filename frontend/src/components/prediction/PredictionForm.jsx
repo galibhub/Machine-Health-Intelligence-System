@@ -1,12 +1,19 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { predictMachine } from "../../services/api";
 import usePredictionStore from "../../services/store";
-import { useNavigate } from "react-router-dom";
 
 function PredictionForm() {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const setResult = usePredictionStore((state) => state.setResult);
+
+  const {
+    setResult,
+    setStatus,
+    setError,
+    status,
+    error,
+  } = usePredictionStore();
 
   const [formData, setFormData] = useState({
     company_name: "",
@@ -19,7 +26,6 @@ function PredictionForm() {
     tool_wear: "",
   });
 
-  // Handle Input Change
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -27,31 +33,49 @@ function PredictionForm() {
     });
   };
 
-  // Handle Form Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+
+    setStatus("loading");
+    setError(null);
 
     try {
       const result = await predictMachine({
         company_name: formData.company_name,
         machine_id: formData.machine_id,
+
         machine_type: formData.machine_type,
-        air_temperature: Number(formData.air_temperature),
-        process_temperature: Number(formData.process_temperature),
-        rotational_speed: Number(formData.rotational_speed),
+
+        air_temperature: Number(
+          formData.air_temperature
+        ),
+
+        process_temperature: Number(
+          formData.process_temperature
+        ),
+
+        rotational_speed: Number(
+          formData.rotational_speed
+        ),
+
         torque: Number(formData.torque),
-        tool_wear: Number(formData.tool_wear),
+
+        tool_wear: Number(
+          formData.tool_wear
+        ),
       });
 
       setResult(result);
 
       navigate("/result");
+    } catch (err) {
+      console.error(err);
 
-      console.log("Prediction Success");
-      console.log(result);
-    } catch (error) {
-      console.error("Prediction Error:", error);
+      setError(
+        "Unable to connect to prediction service. Please try again."
+      );
+    } finally {
+      setStatus("idle");
     }
   };
 
@@ -66,9 +90,19 @@ function PredictionForm() {
             p-8
           "
         >
-          <h2 className="text-3xl font-bold mb-8">Analyze Machine</h2>
+          <h2 className="text-3xl font-bold mb-2">
+            Analyze Machine
+          </h2>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <p className="text-[var(--text-secondary)] mb-8">
+            Enter machine operating parameters
+            for AI-powered health analysis.
+          </p>
+
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-6"
+          >
             <input
               type="text"
               name="company_name"
@@ -76,7 +110,9 @@ function PredictionForm() {
               value={formData.company_name}
               onChange={handleChange}
               className="
-                w-full p-3 rounded-xl
+                w-full
+                p-3
+                rounded-xl
                 bg-[var(--bg-primary)]
                 border border-[var(--border)]
               "
@@ -89,7 +125,9 @@ function PredictionForm() {
               value={formData.machine_id}
               onChange={handleChange}
               className="
-                w-full p-3 rounded-xl
+                w-full
+                p-3
+                rounded-xl
                 bg-[var(--bg-primary)]
                 border border-[var(--border)]
               "
@@ -100,14 +138,24 @@ function PredictionForm() {
               value={formData.machine_type}
               onChange={handleChange}
               className="
-                w-full p-3 rounded-xl
+                w-full
+                p-3
+                rounded-xl
                 bg-[var(--bg-primary)]
                 border border-[var(--border)]
               "
             >
-              <option value="L">Low (L)</option>
-              <option value="M">Medium (M)</option>
-              <option value="H">High (H)</option>
+              <option value="L">
+                Low Duty Machine (L)
+              </option>
+
+              <option value="M">
+                Medium Duty Machine (M)
+              </option>
+
+              <option value="H">
+                Heavy Duty Machine (H)
+              </option>
             </select>
 
             <input
@@ -117,7 +165,9 @@ function PredictionForm() {
               value={formData.air_temperature}
               onChange={handleChange}
               className="
-                w-full p-3 rounded-xl
+                w-full
+                p-3
+                rounded-xl
                 bg-[var(--bg-primary)]
                 border border-[var(--border)]
               "
@@ -130,7 +180,9 @@ function PredictionForm() {
               value={formData.process_temperature}
               onChange={handleChange}
               className="
-                w-full p-3 rounded-xl
+                w-full
+                p-3
+                rounded-xl
                 bg-[var(--bg-primary)]
                 border border-[var(--border)]
               "
@@ -143,7 +195,9 @@ function PredictionForm() {
               value={formData.rotational_speed}
               onChange={handleChange}
               className="
-                w-full p-3 rounded-xl
+                w-full
+                p-3
+                rounded-xl
                 bg-[var(--bg-primary)]
                 border border-[var(--border)]
               "
@@ -156,7 +210,9 @@ function PredictionForm() {
               value={formData.torque}
               onChange={handleChange}
               className="
-                w-full p-3 rounded-xl
+                w-full
+                p-3
+                rounded-xl
                 bg-[var(--bg-primary)]
                 border border-[var(--border)]
               "
@@ -165,31 +221,51 @@ function PredictionForm() {
             <input
               type="number"
               name="tool_wear"
-              placeholder="Tool Wear (Min)"
+              placeholder="Tool Wear (Minutes)"
               value={formData.tool_wear}
               onChange={handleChange}
               className="
-                w-full p-3 rounded-xl
+                w-full
+                p-3
+                rounded-xl
                 bg-[var(--bg-primary)]
                 border border-[var(--border)]
               "
             />
 
+            {error && (
+              <div
+                className="
+                  p-4
+                  rounded-xl
+                  border border-red-500/30
+                  bg-red-500/10
+                  text-red-400
+                  text-sm
+                "
+              >
+                {error}
+              </div>
+            )}
+
             <button
               type="submit"
-              disabled={loading}
+              disabled={status === "loading"}
               className="
-    w-full
-    py-3
-    rounded-xl
-    bg-[var(--accent)]
-    font-semibold
-    hover:opacity-90
-    transition
-    disabled:opacity-50
-  "
+                w-full
+                py-3
+                rounded-xl
+                bg-[var(--accent)]
+                font-semibold
+                transition
+                hover:opacity-90
+                disabled:opacity-50
+                disabled:cursor-not-allowed
+              "
             >
-              {loading ? "Analyzing..." : "Analyze Machine"}
+              {status === "loading"
+                ? "Analyzing Machine..."
+                : "Analyze Machine"}
             </button>
           </form>
         </div>
