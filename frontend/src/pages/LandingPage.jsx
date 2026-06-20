@@ -4,6 +4,7 @@ import FeaturesSection from "../components/sections/FeaturesSection";
 import HowItWorksSection from "../components/sections/HowItWorksSection";
 import AboutSection from "../components/sections/AboutSection";
 import Footer from "../components/layout/Footer";
+import CTASection from "../components/sections/CTASection";
 
 function LandingPage() {
   return (
@@ -13,6 +14,7 @@ function LandingPage() {
       <FeaturesSection />
       <HowItWorksSection />
       <AboutSection />
+      <CTASection />
       <Footer />
     </>
   );

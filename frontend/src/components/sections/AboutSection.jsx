@@ -1,19 +1,42 @@
+const capabilities = [
+  {
+    title: "Failure Prediction",
+    description:
+      "Predict equipment failures before they occur using machine learning models trained on industrial data.",
+  },
+  {
+    title: "Root Cause Analysis",
+    description:
+      "Identify the operational factors contributing most to machine degradation and failure risk.",
+  },
+  {
+    title: "SHAP Explainability",
+    description:
+      "Understand exactly why the model made a prediction through feature contribution analysis.",
+  },
+  {
+    title: "Maintenance Recommendations",
+    description:
+      "Generate actionable maintenance plans to reduce downtime and optimize equipment performance.",
+  },
+];
+
 const stats = [
   {
     value: "99.15%",
     label: "Model Accuracy",
   },
   {
-    value: "88.6%",
-    label: "Cross Validation F1",
-  },
-  {
-    value: "10,000",
+    value: "10K+",
     label: "Industrial Records",
   },
   {
     value: "12",
-    label: "Selected Features",
+    label: "Engineered Features",
+  },
+  {
+    value: "SHAP",
+    label: "Explainable AI",
   },
 ];
 
@@ -21,68 +44,186 @@ function AboutSection() {
   return (
     <section
       id="about"
-      // CHANGED: Replaced bg-slate-50/50 with bg-white for perfect alternating section colors
-      className="py-24 bg-white border-t border-slate-200/80"
+      className="relative py-32"
     >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          
-          {/* Text Content */}
-          <div>
-            <p className="text-blue-600 font-semibold tracking-wider uppercase text-sm mb-3">
-              About The Platform
-            </p>
 
-            <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
-              Built For Modern{" "}
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 pb-1">
-                Predictive Maintenance
-              </span>
-            </h2>
+        {/* Header */}
 
-            <p className="text-slate-600 text-lg leading-relaxed mb-6">
-              Predictive Maintenance AI is an industrial machine health
-              intelligence platform that leverages machine learning to
-              identify potential equipment failures before they occur.
-            </p>
+        <div className="text-center mb-20">
 
-            <p className="text-slate-600 text-lg leading-relaxed">
-              By combining operational parameters, feature engineering,
-              risk assessment, and predictive analytics, the system
-              enables proactive maintenance planning and reduces
-              unplanned downtime.
-            </p>
+          <div
+            className="
+              inline-flex
+              px-4 py-2
+              rounded-full
+              bg-cyan-500/10
+              border border-cyan-500/20
+              text-cyan-400
+              text-sm
+              font-semibold
+              mb-6
+            "
+          >
+            Platform Overview
           </div>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {stats.map((item) => (
+          <h2
+            className="
+              text-5xl
+              lg:text-6xl
+              font-black
+              mb-6
+            "
+          >
+            One Platform.
+            <span className="block text-cyan-400">
+              Complete Machine Intelligence.
+            </span>
+          </h2>
+
+          <p
+            className="
+              max-w-3xl
+              mx-auto
+              text-lg
+              text-slate-400
+            "
+          >
+            Built to help industries move from
+            reactive maintenance to proactive
+            machine health management using
+            explainable artificial intelligence.
+          </p>
+
+        </div>
+
+        {/* Capability Cards */}
+
+        <div
+          className="
+            grid
+            md:grid-cols-2
+            gap-8
+            mb-20
+          "
+        >
+          {capabilities.map((item) => (
+            <div
+              key={item.title}
+              className="
+                group
+                bg-[var(--bg-secondary)]
+                border border-white/10
+                rounded-3xl
+                p-8
+                hover:border-cyan-500/30
+                hover:-translate-y-1
+                transition
+              "
+            >
+
               <div
-                key={item.label}
                 className="
-                  group
-                  bg-white 
-                  border border-slate-200/80 
-                  rounded-2xl 
-                  p-8 
-                  text-center
-                  shadow-sm
-                  hover:shadow-lg hover:-translate-y-1 hover:border-blue-200
-                  transition-all duration-300 ease-in-out
+                  w-14
+                  h-14
+                  rounded-xl
+                  bg-cyan-500/10
+                  border border-cyan-500/20
+                  mb-6
+                  flex
+                  items-center
+                  justify-center
                 "
               >
-                <h3 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-3 transition-transform duration-300 group-hover:scale-105">
+                <div
+                  className="
+                    w-3
+                    h-3
+                    rounded-full
+                    bg-cyan-400
+                  "
+                />
+              </div>
+
+              <h3
+                className="
+                  text-2xl
+                  font-bold
+                  mb-4
+                "
+              >
+                {item.title}
+              </h3>
+
+              <p
+                className="
+                  text-slate-400
+                  leading-relaxed
+                "
+              >
+                {item.description}
+              </p>
+
+            </div>
+          ))}
+        </div>
+
+        {/* Stats */}
+
+        <div
+          className="
+            bg-[var(--bg-secondary)]
+            border border-white/10
+            rounded-3xl
+            overflow-hidden
+          "
+        >
+
+          <div className="grid md:grid-cols-4">
+
+            {stats.map((item, index) => (
+              <div
+                key={item.label}
+                className={`
+                  p-10
+                  text-center
+
+                  ${
+                    index !== stats.length - 1
+                      ? "border-b md:border-b-0 md:border-r border-white/10"
+                      : ""
+                  }
+                `}
+              >
+
+                <h3
+                  className="
+                    text-5xl
+                    font-black
+                    text-cyan-400
+                    mb-3
+                  "
+                >
                   {item.value}
                 </h3>
 
-                <p className="text-slate-500 font-medium">
+                <p
+                  className="
+                    text-slate-400
+                    font-medium
+                  "
+                >
                   {item.label}
                 </p>
+
               </div>
             ))}
+
           </div>
 
         </div>
+
       </div>
     </section>
   );

@@ -1,27 +1,33 @@
 const steps = [
   {
-    number: "01",
-    title: "Input Machine Parameters",
+    step: "01",
+    title: "Machine Data",
     description:
-      "Provide machine operating parameters such as temperature, rotational speed, torque, tool wear, and machine type.",
+      "Collect operational parameters including temperature, torque, rotational speed, tool wear, and machine type.",
   },
   {
-    number: "02",
-    title: "AI-Powered Analysis",
+    step: "02",
+    title: "Feature Engineering",
     description:
-      "Our trained machine learning model evaluates machine condition and detects hidden failure patterns.",
+      "Generate advanced indicators such as power, stress index, wear rate, and temperature gap.",
   },
   {
-    number: "03",
-    title: "Risk Assessment",
+    step: "03",
+    title: "Model Prediction",
     description:
-      "The system calculates failure probability, machine health score, and overall risk level.",
+      "The trained machine learning model estimates machine failure probability and risk level.",
   },
   {
-    number: "04",
-    title: "Actionable Recommendations",
+    step: "04",
+    title: "SHAP Analysis",
     description:
-      "Receive maintenance recommendations and root-cause insights to prevent costly downtime.",
+      "Explain model decisions using feature contribution analysis and impact ranking.",
+  },
+  {
+    step: "05",
+    title: "Maintenance Action",
+    description:
+      "Generate root cause analysis, health score, and actionable maintenance recommendations.",
   },
 ];
 
@@ -29,76 +35,193 @@ function HowItWorksSection() {
   return (
     <section
       id="how-it-works"
-      // CHANGED: Removed the /50 transparency so it perfectly matches the Hero section
-      className="py-24 bg-slate-50 border-t border-slate-200/80"
+      className="relative py-32"
     >
       <div className="max-w-7xl mx-auto px-6">
-        
-        {/* Section Header */}
-        <div className="text-center mb-20">
-          <p className="text-blue-600 font-semibold tracking-wider uppercase text-sm mb-3">
-            Workflow
-          </p>
 
-          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 leading-tight">
-            How The System{" "}
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 pb-1">
+        {/* Header */}
+
+        <div className="text-center mb-24">
+
+          <div
+            className="
+              inline-flex
+              px-4 py-2
+              rounded-full
+              bg-cyan-500/10
+              border border-cyan-500/20
+              text-cyan-400
+              text-sm
+              font-semibold
+              mb-6
+            "
+          >
+            AI Workflow
+          </div>
+
+          <h2
+            className="
+              text-5xl
+              lg:text-6xl
+              font-black
+              mb-6
+            "
+          >
+            How The System
+            <span className="block text-cyan-400">
               Works
             </span>
           </h2>
 
-          <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed">
-            A streamlined AI-driven workflow designed to detect machine
-            failures before they become expensive operational problems.
+          <p
+            className="
+              max-w-3xl
+              mx-auto
+              text-lg
+              text-slate-400
+            "
+          >
+            From raw machine parameters to actionable
+            maintenance recommendations powered by
+            explainable artificial intelligence.
           </p>
+
         </div>
 
-        {/* Steps Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {steps.map((step) => (
-            <div
-              key={step.number}
-              className="
-                group
-                relative
-                bg-white
-                border border-slate-200/80
-                rounded-2xl
-                p-8
-                shadow-sm
-                overflow-hidden
-                hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1 hover:border-blue-300/50
-                transition-all duration-300 ease-in-out
-              "
-            >
-              {/* Decorative Hover Progress Bar */}
-              <div className="absolute top-0 left-0 w-0 h-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 transition-all duration-500 ease-out group-hover:w-full" />
+        {/* Timeline */}
 
-              {/* Step Number */}
-              <span
-                className="
-                  inline-block
-                  text-6xl
-                  font-black
-                  text-transparent bg-clip-text bg-gradient-to-r from-blue-600/10 to-indigo-600/10
-                  mb-4
-                  transition-all duration-300
-                  group-hover:from-blue-600/20 group-hover:to-indigo-600/20 group-hover:scale-105 group-hover:-rotate-3 origin-left
-                "
-              >
-                {step.number}
-              </span>
+        <div className="relative">
 
-              {/* Card Content */}
-              <h3 className="text-xl font-bold text-slate-900 mb-3 transition-colors duration-300 group-hover:text-blue-600">
-                {step.title}
-              </h3>
+          {/* Center Line */}
 
-              <p className="text-slate-600 leading-relaxed">
-                {step.description}
-              </p>
-            </div>
-          ))}
+          <div
+            className="
+              hidden lg:block
+              absolute
+              top-0
+              bottom-0
+              left-1/2
+              -translate-x-1/2
+              w-[2px]
+              bg-gradient-to-b
+              from-cyan-500
+              via-blue-500
+              to-cyan-500
+            "
+          />
+
+          <div className="space-y-12">
+
+            {steps.map((item, index) => {
+
+              const isLeft = index % 2 === 0;
+
+              return (
+                <div
+                  key={item.step}
+                  className="
+                    relative
+                    grid
+                    lg:grid-cols-2
+                    gap-10
+                    items-center
+                  "
+                >
+
+                  {/* LEFT */}
+
+                  <div
+                    className={
+                      isLeft
+                        ? ""
+                        : "lg:order-2"
+                    }
+                  >
+                    <div
+                      className="
+                        bg-[var(--bg-secondary)]
+                        border border-white/10
+                        rounded-3xl
+                        p-8
+                        hover:border-cyan-500/30
+                        transition
+                      "
+                    >
+
+                      <div
+                        className="
+                          text-cyan-400
+                          text-sm
+                          font-bold
+                          mb-3
+                        "
+                      >
+                        STEP {item.step}
+                      </div>
+
+                      <h3
+                        className="
+                          text-3xl
+                          font-bold
+                          mb-4
+                        "
+                      >
+                        {item.title}
+                      </h3>
+
+                      <p
+                        className="
+                          text-slate-400
+                          leading-relaxed
+                        "
+                      >
+                        {item.description}
+                      </p>
+
+                    </div>
+                  </div>
+
+                  {/* RIGHT */}
+
+                  <div
+                    className={
+                      isLeft
+                        ? "lg:order-2"
+                        : ""
+                    }
+                  />
+
+                  {/* CENTER NODE */}
+
+                  <div
+                    className="
+                      hidden lg:flex
+                      absolute
+                      left-1/2
+                      top-1/2
+                      -translate-x-1/2
+                      -translate-y-1/2
+                      w-14
+                      h-14
+                      rounded-full
+                      bg-[var(--bg-primary)]
+                      border
+                      border-cyan-500
+                      items-center
+                      justify-center
+                      font-bold
+                      text-cyan-400
+                      shadow-[0_0_25px_rgba(0,212,255,.25)]
+                    "
+                  >
+                    {item.step}
+                  </div>
+
+                </div>
+              );
+            })}
+          </div>
+
         </div>
 
       </div>

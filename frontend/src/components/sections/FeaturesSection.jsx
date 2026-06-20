@@ -2,22 +2,22 @@ const features = [
   {
     title: "Failure Prediction",
     description:
-      "Predict machine failures before they occur using machine learning models trained on industrial operating data.",
+      "Predict equipment failures before they occur using machine learning models trained on industrial operational data.",
   },
   {
-    title: "Health Score Assessment",
+    title: "SHAP Explainability",
     description:
-      "Generate an overall machine health score to quickly understand equipment condition and reliability.",
+      "Understand why the AI made a prediction with transparent feature-level explanations and impact analysis.",
   },
   {
     title: "Root Cause Analysis",
     description:
-      "Identify the most influential operating factors contributing to elevated machine risk levels.",
+      "Identify critical operating conditions contributing to elevated machine failure risk.",
   },
   {
     title: "Maintenance Recommendations",
     description:
-      "Receive actionable maintenance suggestions to reduce downtime and improve machine performance.",
+      "Receive actionable maintenance strategies designed to reduce downtime and improve reliability.",
   },
 ];
 
@@ -25,71 +25,152 @@ function FeaturesSection() {
   return (
     <section
       id="features"
-      className="py-24 bg-white border-t border-slate-200/80"
+      className="relative py-32"
     >
-      {/* Aligned to max-w-7xl for consistency with Navbar and About */}
       <div className="max-w-7xl mx-auto px-6">
-        
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <p className="text-blue-600 font-semibold tracking-wider uppercase text-sm mb-3">
-            Platform Capabilities
-          </p>
 
-          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 leading-tight">
+        {/* Header */}
+
+        <div className="text-center mb-20">
+
+          <div
+            className="
+              inline-flex
+              px-4 py-2
+              rounded-full
+              bg-cyan-500/10
+              border border-cyan-500/20
+              text-cyan-400
+              text-sm
+              font-semibold
+              mb-6
+            "
+          >
+            Platform Capabilities
+          </div>
+
+          <h2
+            className="
+              text-5xl
+              lg:text-6xl
+              font-black
+              mb-6
+            "
+          >
             Everything You Need For
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 pb-1">
+            <span className="block text-cyan-400">
               Predictive Maintenance
             </span>
           </h2>
 
-          <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed">
-            Monitor machine condition, assess risk, identify root causes,
-            and make proactive maintenance decisions with AI-driven insights.
+          <p
+            className="
+              max-w-3xl
+              mx-auto
+              text-lg
+              text-slate-400
+            "
+          >
+            Monitor machine condition, assess failure risks,
+            understand model decisions, and take proactive
+            maintenance actions using AI-powered insights.
           </p>
+
         </div>
 
-        {/* Features Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {/* Cards */}
+
+        <div className="grid lg:grid-cols-2 gap-8">
+
           {features.map((feature) => (
             <div
               key={feature.title}
               className="
                 group
-                bg-white
-                border border-slate-200/80
-                rounded-2xl
-                p-8
-                shadow-sm
-                hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1 hover:border-blue-300/50
-                transition-all duration-300 ease-in-out
+                relative
+                bg-[var(--bg-secondary)]
+                border border-white/10
+                rounded-3xl
+                p-10
+                overflow-hidden
+                hover:border-cyan-500/30
+                hover:-translate-y-2
+                transition-all
+                duration-300
               "
             >
-              {/* Icon / Indicator */}
+
+              {/* Glow */}
+
               <div
                 className="
-                  w-12 h-12
-                  rounded-xl
-                  bg-blue-50
-                  flex items-center justify-center
-                  mb-6
-                  transition-colors duration-300
-                  group-hover:bg-blue-100
+                  absolute
+                  inset-0
+                  opacity-0
+                  group-hover:opacity-100
+                  transition
+                "
+                style={{
+                  background:
+                    "radial-gradient(circle at top right, rgba(0,212,255,.08), transparent 50%)",
+                }}
+              />
+
+              {/* Icon */}
+
+              <div
+                className="
+                  relative
+                  z-10
+                  w-14
+                  h-14
+                  rounded-2xl
+                  bg-cyan-500/10
+                  border
+                  border-cyan-500/20
+                  flex
+                  items-center
+                  justify-center
+                  mb-8
                 "
               >
-                <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 shadow-sm transition-transform duration-300 group-hover:scale-150" />
+                <div
+                  className="
+                    w-3
+                    h-3
+                    rounded-full
+                    bg-cyan-400
+                  "
+                />
               </div>
 
-              {/* Card Content */}
-              <h3 className="text-xl font-bold text-slate-900 mb-3 transition-colors duration-300 group-hover:text-blue-600">
-                {feature.title}
-              </h3>
+              <div className="relative z-10">
 
-              <p className="text-slate-600 leading-relaxed">
-                {feature.description}
-              </p>
+                <h3
+                  className="
+                    text-3xl
+                    font-bold
+                    mb-4
+                  "
+                >
+                  {feature.title}
+                </h3>
+
+                <p
+                  className="
+                    text-slate-400
+                    leading-relaxed
+                    text-lg
+                  "
+                >
+                  {feature.description}
+                </p>
+
+              </div>
+
             </div>
           ))}
+
         </div>
 
       </div>

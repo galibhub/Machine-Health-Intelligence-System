@@ -23,44 +23,94 @@ function HealthScoreGauge() {
     return "Critical";
   };
 
-  const healthColor = getHealthColor(score);
+  const healthColor =
+    getHealthColor(score);
+
+  const radius = 65;
+  const circumference =
+    2 * Math.PI * radius;
+
+  const offset =
+    circumference -
+    (score / 100) *
+      circumference;
 
   return (
     <div
       className="
         bg-[var(--bg-secondary)]
-        border border-[var(--border)]
-        rounded-2xl
-        p-6
+        border border-white/10
+        rounded-3xl
+        p-8
       "
     >
-      <div className="mb-6">
-        <h3 className="text-xl font-bold">
+      <div className="mb-8">
+        <h3 className="text-2xl font-bold">
           Health Score
         </h3>
 
-        <p className="text-sm text-[var(--text-secondary)] mt-1">
+        <p className="text-slate-400 mt-1">
           Overall machine condition
         </p>
       </div>
 
-      <div className="flex flex-col items-center">
+      <div className="flex justify-center">
 
-        <div
-          className="
-            w-36
-            h-36
-            rounded-full
-            border-[10px]
-            flex items-center justify-center
-          "
-          style={{
-            borderColor: healthColor,
-          }}
-        >
-          <div className="text-center">
+        <div className="relative">
+
+          <svg
+            width="170"
+            height="170"
+            className="-rotate-90"
+          >
+            {/* Background Ring */}
+
+            <circle
+              cx="85"
+              cy="85"
+              r={radius}
+              fill="none"
+              stroke="#1e293b"
+              strokeWidth="12"
+            />
+
+            {/* Progress Ring */}
+
+            <circle
+              cx="85"
+              cy="85"
+              r={radius}
+              fill="none"
+              stroke={healthColor}
+              strokeWidth="12"
+              strokeLinecap="round"
+              strokeDasharray={
+                circumference
+              }
+              strokeDashoffset={offset}
+              style={{
+                transition:
+                  "stroke-dashoffset 1s ease",
+                filter:
+                  "drop-shadow(0 0 10px rgba(0,212,255,.35))",
+              }}
+            />
+          </svg>
+
+          {/* Center Content */}
+
+          <div
+            className="
+              absolute
+              inset-0
+              flex
+              flex-col
+              items-center
+              justify-center
+            "
+          >
             <div
-              className="text-4xl font-bold"
+              className="text-5xl font-black"
               style={{
                 color: healthColor,
               }}
@@ -69,7 +119,7 @@ function HealthScoreGauge() {
             </div>
 
             <div
-              className="text-xs font-medium mt-1"
+              className="text-sm font-semibold mt-2"
               style={{
                 color: healthColor,
               }}
@@ -77,27 +127,48 @@ function HealthScoreGauge() {
               {getHealthStatus(score)}
             </div>
           </div>
-        </div>
-
-        <div className="w-full mt-6">
-
-          <div className="flex justify-between text-xs text-[var(--text-secondary)]">
-            <span>Critical</span>
-            <span>Excellent</span>
-          </div>
-
-          <div className="mt-2 h-2 rounded-full bg-[var(--bg-primary)] overflow-hidden">
-            <div
-              className="h-full rounded-full"
-              style={{
-                width: `${score}%`,
-                backgroundColor: healthColor,
-              }}
-            />
-          </div>
 
         </div>
 
+      </div>
+
+      {/* Footer Stats */}
+
+      <div
+        className="
+          mt-8
+          pt-6
+          border-t
+          border-white/10
+          grid
+          grid-cols-2
+          gap-4
+        "
+      >
+        <div>
+          <p className="text-xs text-slate-500 uppercase">
+            Condition
+          </p>
+
+          <p
+            className="font-bold mt-1"
+            style={{
+              color: healthColor,
+            }}
+          >
+            {getHealthStatus(score)}
+          </p>
+        </div>
+
+        <div className="text-right">
+          <p className="text-xs text-slate-500 uppercase">
+            Score
+          </p>
+
+          <p className="font-bold mt-1">
+            {score}/100
+          </p>
+        </div>
       </div>
     </div>
   );
