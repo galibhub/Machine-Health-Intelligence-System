@@ -1,20 +1,33 @@
-import Navbar from "./components/layout/Navbar";
-import HeroSection from "./components/sections/HeroSection";
-import FeaturesSection from "./components/sections/FeaturesSection";
-import HowItWorksSection from "./components/sections/HowItWorksSection";
-import AboutSection from "./components/sections/AboutSection";
-import Footer from "./components/layout/Footer";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+
+import LandingPage from "./pages/LandingPage";
+import AnalyzePage from "./pages/AnalyzePage";
+import ResultPage from "./pages/ResultPage";
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <HeroSection />
-      <FeaturesSection />
-      <HowItWorksSection />
-      <AboutSection />
-      <Footer />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={<LandingPage />}
+        />
+
+        <Route
+          path="/analyze"
+          element={<AnalyzePage />}
+        />
+
+        <Route
+          path="/result"
+          element={<ResultPage />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

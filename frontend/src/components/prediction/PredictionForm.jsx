@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { predictMachine } from "../../services/api";
 import usePredictionStore from "../../services/store";
+import { useNavigate } from "react-router-dom";
 
 function PredictionForm() {
-  const setResult = usePredictionStore(
-    (state) => state.setResult
-  );
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const setResult = usePredictionStore((state) => state.setResult);
 
   const [formData, setFormData] = useState({
     company_name: "",
@@ -29,6 +30,7 @@ function PredictionForm() {
   // Handle Form Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const result = await predictMachine({
@@ -36,26 +38,20 @@ function PredictionForm() {
         machine_id: formData.machine_id,
         machine_type: formData.machine_type,
         air_temperature: Number(formData.air_temperature),
-        process_temperature: Number(
-          formData.process_temperature
-        ),
-        rotational_speed: Number(
-          formData.rotational_speed
-        ),
+        process_temperature: Number(formData.process_temperature),
+        rotational_speed: Number(formData.rotational_speed),
         torque: Number(formData.torque),
         tool_wear: Number(formData.tool_wear),
       });
 
       setResult(result);
 
+      navigate("/result");
+
       console.log("Prediction Success");
       console.log(result);
-
     } catch (error) {
-      console.error(
-        "Prediction Error:",
-        error
-      );
+      console.error("Prediction Error:", error);
     }
   };
 
@@ -70,14 +66,9 @@ function PredictionForm() {
             p-8
           "
         >
-          <h2 className="text-3xl font-bold mb-8">
-            Analyze Machine
-          </h2>
+          <h2 className="text-3xl font-bold mb-8">Analyze Machine</h2>
 
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-6"
-          >
+          <form onSubmit={handleSubmit} className="space-y-6">
             <input
               type="text"
               name="company_name"
@@ -186,17 +177,19 @@ function PredictionForm() {
 
             <button
               type="submit"
+              disabled={loading}
               className="
-                w-full
-                py-3
-                rounded-xl
-                bg-[var(--accent)]
-                font-semibold
-                hover:opacity-90
-                transition
-              "
+    w-full
+    py-3
+    rounded-xl
+    bg-[var(--accent)]
+    font-semibold
+    hover:opacity-90
+    transition
+    disabled:opacity-50
+  "
             >
-              Analyze Machine
+              {loading ? "Analyzing..." : "Analyze Machine"}
             </button>
           </form>
         </div>
