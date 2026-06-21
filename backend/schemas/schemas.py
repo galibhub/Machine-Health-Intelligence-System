@@ -50,7 +50,9 @@ class Recommendation(BaseModel):
 
 
 class PredictionResponse(BaseModel):
-
+    company_name: Optional[str] = None
+    machine_id: Optional[str] = None
+    machine_type: Optional[str] = None
     prediction: str
 
     probability: float

@@ -92,21 +92,32 @@ def predict_machine_failure(data):
 
 
     return {
-        "prediction": (
-            "Failure"
-            if prediction == 1
-            else "No Failure"
-        ),
-        "probability": float(
-            round(
-                probability,
-                2
-            )
-        ),
-        "risk_level": risk_level,
-        "health_score": health_score,
-        "root_causes": root_causes,
-        "model_explanations": model_explanations,
-        "recommendations": recommendations
 
-    }
+    "company_name": data.company_name,
+    "machine_id": data.machine_id,
+    "machine_type": data.machine_type,
+
+    "prediction": (
+        "Failure"
+        if prediction == 1
+        else "No Failure"
+    ),
+
+    "probability": float(
+        round(
+            probability,
+            2
+        )
+    ),
+
+    "risk_level": risk_level,
+
+    "health_score": health_score,
+
+    "root_causes": root_causes,
+
+    "model_explanations": model_explanations,
+
+    "recommendations": recommendations
+
+}
