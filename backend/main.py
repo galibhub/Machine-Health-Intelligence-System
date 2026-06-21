@@ -52,3 +52,16 @@ def predict(
     )
 
     return result
+
+# dummy apin for web monitor
+@app.get("/me")
+def me():
+    return {
+        "name": "Ibrahim Ahmed Galib",
+        "role": "Machine Learning Engineer & Full Stack Developer",
+        "project": "Machine Health Intelligence System",
+        "university": "Daffodil International University",
+        "department": "Computer Science and Engineering",
+        "github": "https://github.com/galibhub",
+        "api_status": "running"
+    }
