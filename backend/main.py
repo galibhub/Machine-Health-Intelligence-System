@@ -1,12 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.schemas.schemas import (
+from schemas.schemas import (
     PredictionRequest,
     PredictionResponse
 )
 
-from backend.services.prediction_service import (
+from services.prediction_service import (
     predict_machine_failure
 )
 

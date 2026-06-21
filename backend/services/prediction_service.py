@@ -1,26 +1,27 @@
 import joblib
 from pathlib import Path
 
-from backend.utils.feature_engineering import (
+from utils.feature_engineering import (
     create_features
 )
-from backend.services.risk_service import (
+
+from services.risk_service import (
     calculate_risk_level
 )
 
-from backend.services.health_service import (
+from services.health_service import (
     calculate_health_score
 )
 
-from backend.services.explanation_service import (
+from services.explanation_service import (
     analyze_root_causes
 )
 
-from backend.services.explainability_service import (
+from services.explainability_service import (
     get_top_contributors
 )
 
-from backend.services.recommendation_service import (
+from services.recommendation_service import (
     generate_recommendations
 )
 
