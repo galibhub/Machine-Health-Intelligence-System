@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List, Optional
 
 
@@ -10,15 +10,15 @@ class PredictionRequest(BaseModel):
 
     machine_type: str
 
-    air_temperature: float
+    air_temperature: float = Field(gt=0)
 
-    process_temperature: float
+    process_temperature: float = Field(gt=0)
 
-    rotational_speed: int
+    rotational_speed: int = Field(gt=0)
 
-    torque: float
+    torque: float = Field(ge=0)
 
-    tool_wear: int
+    tool_wear: int = Field(ge=0)
 
 
 class RootCause(BaseModel):
@@ -66,7 +66,6 @@ class PredictionResponse(BaseModel):
     recommendations: List[
         Recommendation
     ]
-
 
 
 

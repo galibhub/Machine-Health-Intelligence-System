@@ -1,4 +1,5 @@
 import shap
+import numpy as np
 
 
 def get_top_contributors(
@@ -15,9 +16,19 @@ def get_top_contributors(
         features
     )
 
-    shap_values = (
-        explanation.values[0]
-    )
+    shap_values = explanation.values
+
+    if isinstance(shap_values, list):
+        shap_values = shap_values[1 if len(shap_values) > 1 else 0]
+
+    shap_values = np.asarray(shap_values)
+
+    if shap_values.ndim == 3:
+        shap_values = shap_values[0, :, 1 if shap_values.shape[2] > 1 else 0]
+    elif shap_values.ndim == 2:
+        shap_values = shap_values[0]
+    else:
+        shap_values = shap_values.reshape(-1)
 
     feature_names = (
         features.columns.tolist()

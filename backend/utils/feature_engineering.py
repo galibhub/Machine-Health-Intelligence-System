@@ -4,15 +4,9 @@ import pandas as pd
 
 def create_features(data):
 
-    air_temp_k = (
-        data.air_temperature
-        + 273.15
-    )
+    air_temp_k = data.air_temperature
 
-    process_temp_k = (
-        data.process_temperature
-        + 273.15
-    )
+    process_temp_k = data.process_temperature
 
     temp_gap = (
         process_temp_k
