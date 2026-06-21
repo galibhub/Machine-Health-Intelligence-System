@@ -86,7 +86,16 @@ function PredictionForm() {
 
       console.log("RESULT DATA:", result);
 
-      setResult(result);
+      // setResult(result);
+      // navigate("/result");
+
+      setResult({
+        ...result,
+        company_name: formData.company_name,
+        machine_id: formData.machine_id,
+        machine_type: formData.machine_type,
+      });
+
       navigate("/result");
     } catch (err) {
       console.error(err);
@@ -106,7 +115,6 @@ function PredictionForm() {
       <div className="w-full max-w-4xl mx-auto px-4 relative z-10">
         {/* Main Form Card */}
         <div className="bg-[#0A1120]/80 backdrop-blur-xl border border-cyan-500/20 rounded-3xl p-8 md:p-12 shadow-[0_0_50px_-12px_rgba(6,182,212,0.15)] relative overflow-hidden">
-          
           {/* Inner Card Glow Corner */}
           <div className="absolute -top-32 -right-32 w-64 h-64 bg-cyan-500/20 blur-[80px] rounded-full pointer-events-none" />
 
@@ -119,7 +127,8 @@ function PredictionForm() {
               </span>
             </h2>
             <p className="text-slate-400 text-lg max-w-2xl">
-              Enter industrial telemetry data to run real-time predictive failure analysis using our AI intelligence model.
+              Enter industrial telemetry data to run real-time predictive
+              failure analysis using our AI intelligence model.
             </p>
           </div>
 
@@ -131,7 +140,7 @@ function PredictionForm() {
                 Quick Load Telemetry Profiles
               </p>
             </div>
-            
+
             <div className="flex flex-wrap gap-4">
               <button
                 type="button"
@@ -141,7 +150,7 @@ function PredictionForm() {
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                 Healthy
               </button>
-              
+
               <button
                 type="button"
                 onClick={() => loadSample(warningSample)}
@@ -150,7 +159,7 @@ function PredictionForm() {
                 <div className="w-1.5 h-1.5 rounded-full bg-amber-400" />
                 Warning
               </button>
-              
+
               <button
                 type="button"
                 onClick={() => loadSample(criticalSample)}
@@ -166,7 +175,6 @@ function PredictionForm() {
           <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
             {/* Input Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-              
               {/* Company Name */}
               <div className="md:col-span-2 space-y-2">
                 <label className="text-sm font-semibold text-slate-300 tracking-wide">
@@ -209,13 +217,29 @@ function PredictionForm() {
                     onChange={handleChange}
                     className="w-full p-4 rounded-xl bg-[#040914] border border-slate-800/80 text-white focus:bg-[#0A1120] focus:ring-2 focus:ring-cyan-500/40 focus:border-cyan-500 outline-none transition-all duration-300 appearance-none shadow-inner cursor-pointer"
                   >
-                    <option value="L" className="bg-[#0A1120]">Low Duty Machine (L)</option>
-                    <option value="M" className="bg-[#0A1120]">Medium Duty Machine (M)</option>
-                    <option value="H" className="bg-[#0A1120]">Heavy Duty Machine (H)</option>
+                    <option value="L" className="bg-[#0A1120]">
+                      Low Duty Machine (L)
+                    </option>
+                    <option value="M" className="bg-[#0A1120]">
+                      Medium Duty Machine (M)
+                    </option>
+                    <option value="H" className="bg-[#0A1120]">
+                      Heavy Duty Machine (H)
+                    </option>
                   </select>
                   <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-cyan-500">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 9l-7 7-7-7"
+                      />
                     </svg>
                   </div>
                 </div>
@@ -225,7 +249,9 @@ function PredictionForm() {
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-slate-300 tracking-wide flex justify-between">
                   <span>Air Temperature</span>
-                  <span className="text-cyan-500/50 font-mono text-xs mt-0.5">KELVIN [K]</span>
+                  <span className="text-cyan-500/50 font-mono text-xs mt-0.5">
+                    KELVIN [K]
+                  </span>
                 </label>
                 <input
                   type="number"
@@ -241,7 +267,9 @@ function PredictionForm() {
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-slate-300 tracking-wide flex justify-between">
                   <span>Process Temp</span>
-                  <span className="text-cyan-500/50 font-mono text-xs mt-0.5">KELVIN [K]</span>
+                  <span className="text-cyan-500/50 font-mono text-xs mt-0.5">
+                    KELVIN [K]
+                  </span>
                 </label>
                 <input
                   type="number"
@@ -257,7 +285,9 @@ function PredictionForm() {
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-slate-300 tracking-wide flex justify-between">
                   <span>Rotational Speed</span>
-                  <span className="text-cyan-500/50 font-mono text-xs mt-0.5">REVS/MIN [RPM]</span>
+                  <span className="text-cyan-500/50 font-mono text-xs mt-0.5">
+                    REVS/MIN [RPM]
+                  </span>
                 </label>
                 <input
                   type="number"
@@ -273,7 +303,9 @@ function PredictionForm() {
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-slate-300 tracking-wide flex justify-between">
                   <span>Torque</span>
-                  <span className="text-cyan-500/50 font-mono text-xs mt-0.5">NEWTON-METERS [Nm]</span>
+                  <span className="text-cyan-500/50 font-mono text-xs mt-0.5">
+                    NEWTON-METERS [Nm]
+                  </span>
                 </label>
                 <input
                   type="number"
@@ -289,7 +321,9 @@ function PredictionForm() {
               <div className="md:col-span-2 space-y-2">
                 <label className="text-sm font-semibold text-slate-300 tracking-wide flex justify-between">
                   <span>Tool Wear</span>
-                  <span className="text-cyan-500/50 font-mono text-xs mt-0.5">MINUTES [Min]</span>
+                  <span className="text-cyan-500/50 font-mono text-xs mt-0.5">
+                    MINUTES [Min]
+                  </span>
                 </label>
                 <input
                   type="number"
@@ -318,7 +352,9 @@ function PredictionForm() {
                     d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                   />
                 </svg>
-                <p className="text-rose-400 text-sm font-semibold tracking-wide">{error}</p>
+                <p className="text-rose-400 text-sm font-semibold tracking-wide">
+                  {error}
+                </p>
               </div>
             )}
 
@@ -369,13 +405,18 @@ function PredictionForm() {
                 ) : (
                   <>
                     Execute Diagnostics
-                    <svg 
-                      className="w-5 h-5 group-hover:translate-x-1 transition-transform" 
-                      fill="none" 
-                      stroke="currentColor" 
+                    <svg
+                      className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                      fill="none"
+                      stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="3"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
                     </svg>
                   </>
                 )}
