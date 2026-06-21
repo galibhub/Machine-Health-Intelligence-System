@@ -6,29 +6,34 @@ Thumbs.db
 desktop.ini
 
 # ======================================
-# Python
+# Python Cache
 # ======================================
 __pycache__/
 *.py[cod]
 *$py.class
-*.so
-*.dylib
-pip-wheel-metadata/
 
 # ======================================
 # Virtual Environments
 # ======================================
-.venv/
 venv/
+.venv/
 env/
 ENV/
-env.bak/
-venv.bak/
+backend/venv/
 backend/.venv/
+frontend/venv/
 frontend/.venv/
 
 # ======================================
-# Jupyter Notebook
+# Environment Variables
+# ======================================
+.env
+.env.local
+.env.production
+.env.*
+
+# ======================================
+# Jupyter
 # ======================================
 .ipynb_checkpoints/
 **/.ipynb_checkpoints/
@@ -44,9 +49,7 @@ eggs/
 parts/
 sdist/
 wheels/
-share/python-wheels/
 *.egg-info/
-.installed.cfg
 *.egg
 
 # ======================================
@@ -65,31 +68,22 @@ coverage.xml
 # Logs
 # ======================================
 *.log
-pip-log.txt
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
 # ======================================
-# Environment Variables
-# ======================================
-.env
-.env.local
-.env.production
-.env.*
-
-# ======================================
-# React / Vite / Node
+# React / Vite
 # ======================================
 frontend/node_modules/
 frontend/dist/
 frontend/.vite/
-frontend/.parcel-cache/
-frontend/.cache/
+
+# ======================================
+# Node
+# ======================================
 node_modules/
-dist/
-build/
 
 # ======================================
 # VS Code
@@ -97,7 +91,7 @@ build/
 .vscode/
 
 # ======================================
-# JetBrains IDEs
+# JetBrains
 # ======================================
 .idea/
 
@@ -124,51 +118,27 @@ tempCodeRunnerFile.py
 *~
 
 # ======================================
-# Streamlit
-# ======================================
-.streamlit/secrets.toml
-
-# ======================================
-# ML Model Files (binaries / artifacts)
-# ======================================
-# Keep `model_contract.json` tracked; ignore heavy model binaries.
-backend/models/*.pkl
-backend/models/*.joblib
-backend/models/*.h5
-backend/models/*.pt
-backend/models/*.pth
-backend/models/*.ckpt
-backend/models/*.onnx
-models/*.pkl
-models/*.joblib
-models/*.h5
-models/*.pt
-models/*.pth
-models/*.ckpt
-models/*.onnx
-!backend/models/model_contract.json
-!models/model_contract.json
-
-# ======================================
 # Databases
 # ======================================
 *.sqlite
 *.sqlite3
 *.db
-*.db-journal
 
 # ======================================
-# Optional: data files (uncomment if you want to ignore datasets)
+# Streamlit
+# ======================================
+.streamlit/secrets.toml
+
+# ======================================
+# Data Files (Optional)
+# Uncomment if datasets become large
 # ======================================
 # data/raw/*.csv
 # data/processed/*.csv
-# data/**/*.parquet
 
 # ======================================
-# Misc
+# Keep ML Model Files
 # ======================================
-.envrc
-coverage
-cover/
-thumbs.db
-
+# DO NOT IGNORE:
+# backend/models/random_forest.pkl
+# backend/models/model_contract.json
